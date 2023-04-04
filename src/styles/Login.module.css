@@ -1,0 +1,199 @@
+.Flex_Sb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main {
+    width: 100%;
+    height: calc(100svh - 6rem);
+    padding: 0 3rem 0 3rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.left {
+    width: 45%;
+    height: calc(100svh - 8rem);
+    box-sizing: border-box;
+}
+
+.right {
+    width: 45%;
+    background-color: aliceblue;
+    height: calc(100svh - 8rem);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.right_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+}
+
+.title {
+    color: black;
+    font-size: 2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5rem;
+    width: 100%;
+    text-align: center;
+
+}
+
+.desc {
+    color: black;
+    font-size: 1.2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 0.2rem;
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0 0 0;
+
+}
+
+
+.input_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 2rem;
+
+}
+
+.input_box input {
+    width: 100%;
+    border-radius: 0.4rem;
+    border: 1px solid grey;
+    text-align: left;
+    padding: 1rem;
+    color: black;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 2rem;
+    margin: 1rem 0 1rem 0;
+}
+
+.pass_box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%
+}
+
+.show_pass {
+    box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    width: 20%;
+    font-size: 2rem;
+    min-height: 4rem;
+    border-top-left-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+    border-top-right-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    border-top: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-color: rgb(255, 255, 255);
+}
+
+.pass_box input {
+    width: 80%;
+    border-top-left-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    border-right: none;
+    text-align: left;
+    padding: 1rem;
+    color: black;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 4rem;
+    margin: 1rem 0 1rem 0;
+}
+
+.pass_box,
+.input_box input:focus {
+    outline: none;
+}
+
+.chkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.chkbox input {
+    width: 1rem;
+    min-height: 1rem;
+    margin: 1rem 0.5rem 0rem 0;
+}
+
+.chkbox_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label_chkbox {
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 1rem;
+    margin: 1rem 0.5rem 0rem 0;
+}
+
+.submit_btn {
+    background-color: #6880FF;
+    width: 100%;
+    border-radius: 1rem;
+    margin: 2rem 0 0 0;
+    min-height: 4rem;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all ease-in-out 0.3s;
+    box-sizing: border-box;
+}
+
+.submit_btn:hover {
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.forget_pass {
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all ease-in-out 0.2s;
+    margin: 1rem 0rem 0rem 0;
+}
+
+.forget_pass:hover {
+    cursor: pointer;
+    color: #6880FF;
+}
+
+.lowerdiv {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}

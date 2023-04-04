@@ -1,0 +1,15 @@
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100svh - 8rem);
+    width: 100%;
+    overflow: hidden;
+}
+
+.imgDiv {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: auto;
+}

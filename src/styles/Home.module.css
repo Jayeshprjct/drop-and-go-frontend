@@ -1,0 +1,344 @@
+.main {
+  padding: 1rem 4rem 1rem 4rem;
+  width: 100%;
+}
+
+.heading_container {
+  width: 100%;
+}
+
+.main_1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text_container {
+  color: aliceblue;
+  font-size: 7rem;
+  letter-spacing: 0.5rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.lower_text {
+  font-size: 1.5rem;
+  color: aliceblue;
+  letter-spacing: normal;
+  margin: 2rem 0 1rem 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.animated_Video {
+  display: grid;
+  place-content: center;
+  width: auto;
+  background-color: rgba(255, 255, 255, 0);
+  height: 37rem;
+}
+
+.start_sharing {
+  background-color: white;
+  color: black;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  max-width: 20rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  transition: all ease-in-out 0.3s;
+}
+
+.start_sharing:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.main_2 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.main_3 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.feature_box {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+.icon svg {
+  font-size: 4rem;
+  color: white;
+  margin: 0 0 2rem 0;
+}
+
+.feature_title {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: aliceblue;
+  font-size: 2rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.feature_desc {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.state_progress {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 3rem 0;
+}
+
+.SP_Item {
+  min-height: 10rem;
+  aspect-ratio: 1;
+  background-color: aliceblue;
+  border-radius: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(42, 42, 42);
+  font-size: 1.6rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.Spitem {
+  color: black;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
+  height: 32px;
+  margin: 0 0 0.5rem 0;
+}
+
+.Spitem > svg {
+  vertical-align: baseline;
+}
+
+.dash {
+  width: 20rem;
+  height: 2px;
+  background-color: aliceblue;
+}
+
+.faq {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 35rem;
+  width: 40%;
+  margin: 0 0 0 5rem;
+}
+
+.animation {
+  height: 37rem;
+  width: 60%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 1rem 0 1rem 0;
+}
+
+.content {
+  overflow: hidden;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease-out;
+  color: #dcdcdc;
+  font-size: 1.5rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.heading_parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: aliceblue;
+  background-color: black;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  color: black;
+}
+
+.accordion {
+  width: 100%;
+  border-bottom: 1px solid #525252;
+  padding: 0.2rem;
+}
+
+.progress_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2.5rem;
+  margin: 2rem 0 2rem 0;
+}
+
+@media screen and (max-width: 800px) {
+  .main {
+    padding: 1rem;
+    width: 100%;
+  }
+  .main_1 {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .text_container {
+    color: aliceblue;
+    font-size: 5rem;
+    letter-spacing: 0.5rem;
+    margin: 1rem 0 1rem 0;
+  }
+
+  .lower_text {
+    font-size: 1.5rem;
+    color: aliceblue;
+    letter-spacing: normal;
+    margin: 2rem 0 1rem 0;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+
+  .animated_Video {
+    display: grid;
+    place-content: center;
+    width: auto;
+    background-color: rgba(255, 255, 255, 0);
+    height: 37rem;
+  }
+
+  .start_sharing {
+    background-color: white;
+    color: black;
+    border-radius: 0.3rem;
+    padding: 1rem;
+    max-width: 20rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    transition: all ease-in-out 0.3s;
+  }
+  .spanStyle {
+    width: 100%;
+    color: #6880ff;
+    display: block;
+  }
+
+  .main_2 {
+    flex-direction: column;
+  }
+
+  .faq {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: auto;
+    width: 100%;
+    margin: 0 0 0 0;
+  }
+
+  .animation {
+    height: auto;
+    width: 100%;
+  }
+
+  .main_3 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    color: rgb(255, 255, 255);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 1rem 0 1rem 0;
+  }
+
+  .content {
+    overflow: hidden;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease-out;
+    color: #dcdcdc;
+    font-size: 1.3rem;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+
+  .state_progress {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 3rem 0;
+  }
+
+  .progress_text {
+    padding: 0;
+    font-size: 2rem;
+  }
+
+  .dash {
+    height: 10rem;
+    width: 2px;
+    background-color: aliceblue;
+  }
+
+  .SP_Item {
+    min-height: 8rem;
+    aspect-ratio: 1;
+    background-color: aliceblue;
+    border-radius: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(42, 42, 42);
+    font-size: 1.3rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    margin: 0;
+  }
+}
