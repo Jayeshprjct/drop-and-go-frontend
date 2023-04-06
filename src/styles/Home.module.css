@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;400;500;700&display=swap');
+
 .main {
   padding: 1rem 4rem 1rem 4rem;
   width: 100%;
@@ -16,8 +20,9 @@
 .text_container {
   color: aliceblue;
   font-size: 7rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.2rem;
   margin: 1rem 0 1rem 0;
+  font-family: 'Mulish', sans-serif;
 }
 
 .lower_text {
@@ -25,16 +30,15 @@
   color: aliceblue;
   letter-spacing: normal;
   margin: 2rem 0 1rem 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .animated_Video {
   display: grid;
-  place-content: center;
+  place-items: center;
   width: auto;
   background-color: rgba(255, 255, 255, 0);
-  height: 37rem;
+  border-radius: 20rem;
 }
 
 .start_sharing {
@@ -46,8 +50,7 @@
   margin-top: 2rem;
   text-align: center;
   font-size: 1.2rem;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   transition: all ease-in-out 0.3s;
 }
 
@@ -84,14 +87,14 @@
 }
 
 .feature_title {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: aliceblue;
   font-size: 2rem;
   margin: 0.5rem 0 0.5rem 0;
 }
 
 .feature_desc {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Mulish', sans-serif;
   color: white;
   font-size: 1.2rem;
   margin: 0 0 0.5rem 0;
@@ -116,22 +119,20 @@
   flex-direction: column;
   color: rgb(42, 42, 42);
   font-size: 1.6rem;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 2rem;
   margin: 1rem 0 1rem 0;
 }
 
 .Spitem {
   color: black;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
   height: 32px;
   margin: 0 0 0.5rem 0;
 }
 
-.Spitem > svg {
+.Spitem>svg {
   vertical-align: baseline;
 }
 
@@ -162,7 +163,7 @@
   align-items: center;
   font-size: 1.5rem;
   color: rgb(255, 255, 255);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 1rem 0 1rem 0;
 }
 
@@ -171,8 +172,9 @@
   margin-top: 0.5rem;
   transition: all 0.3s ease-out;
   color: #dcdcdc;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin: 0.5rem 0 0.5rem 0;
+  font-family: 'Mulish', sans-serif;
 }
 
 .heading_parent {
@@ -182,6 +184,7 @@
   padding: 1rem;
   color: aliceblue;
   background-color: black;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .accordion-content {
@@ -203,7 +206,7 @@
   align-items: center;
   padding: 2rem;
   color: white;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 2.5rem;
   margin: 2rem 0 2rem 0;
 }
@@ -213,6 +216,7 @@
     padding: 1rem;
     width: 100%;
   }
+
   .main_1 {
     align-items: flex-start;
     flex-direction: column;
@@ -230,8 +234,6 @@
     color: aliceblue;
     letter-spacing: normal;
     margin: 2rem 0 1rem 0;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
 
   .animated_Video {
@@ -251,10 +253,9 @@
     margin-top: 2rem;
     text-align: center;
     font-size: 1.2rem;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     transition: all ease-in-out 0.3s;
   }
+
   .spanStyle {
     width: 100%;
     color: #6880ff;
@@ -292,7 +293,6 @@
     align-items: center;
     font-size: 1.3rem;
     color: rgb(255, 255, 255);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 1rem 0 1rem 0;
   }
 
@@ -336,8 +336,6 @@
     flex-direction: column;
     color: rgb(42, 42, 42);
     font-size: 1.3rem;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     padding: 2rem;
     margin: 0;
   }

@@ -8,8 +8,11 @@ import { SlShare } from "react-icons/sl";
 import { BsDownload } from "react-icons/bs";
 import Accordion from "./Accordian";
 import Lottie from "react-lottie-player";
+import video from "../../public/video.mp4";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [feature, setFeature] = useState([
     {
       title: "Larger file space",
@@ -51,6 +54,10 @@ const Home = () => {
     },
   ]);
 
+  const startShare = () => {
+    navigate("/login");
+  };
+
   return (
     <>
       <Header />
@@ -61,14 +68,19 @@ const Home = () => {
             <div className={styles.lower_text}>
               Quickly share a file with others in no time!
             </div>
-            <div className={styles.start_sharing}>Start Sharing</div>
+            <div className={styles.start_sharing} onClick={startShare}>
+              Start Sharing
+            </div>
           </div>
           <div className={styles.animated_Video} data-aos="fade-up">
-            {/* <Lottie
-              animationData={lottieJson}
-              play
-              style={{ width: 150, height: 150 }}
-            /> */}
+            <lottie-player
+              src="https://assets5.lottiefiles.com/packages/lf20_qjjhj8dr.json"
+              background="transparent"
+              speed="1"
+              style={{ height: "37rem" }}
+              loop
+              autoplay
+            />
           </div>
         </div>
         <div className={styles.main_2}>

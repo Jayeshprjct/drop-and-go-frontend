@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import styles from "../styles/Login.module.css";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import CarouselC from "./Carousel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import Loader from "./Loader";
 
 const Login = () => {
   const BaseUrl = import.meta.env.VITE_BaseUrl;
+  const navigate = useNavigate();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [isRegistered, setRegistered] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const handlepassVisibility = () => {
     setShowPass(!showPass);
+  };
+
+  const toggleRegistered = () => {
+    setRegistered(!isRegistered);
   };
 
   const toastProps = {
@@ -28,95 +38,155 @@ const Login = () => {
     theme: "light",
   };
 
-  const handleLogin = () => {
-    if (user != "" && pass != "") {
-      if (emailRegex.test(user)) {
-        checkLogin(user, pass);
-      }
+  const Toast = (msg, type) => {
+    if (type == "warning") {
+      toast.warn(msg, toastProps);
+    } else if (type == "error") {
+      toast.error(msg, toastProps);
+    } else if (type == "info") {
+      toast.info(msg, toastProps);
+    } else if (type == "success") {
+      toast.success(msg, toastProps);
+    } else {
+      toast(msg, toastProps);
     }
   };
 
-  const Toast = (msg) => {
-    toast(msg, toastProps);
+  const handleLogin = () => {
+    if (email != "" && pass != "") {
+      if (emailRegex.test(email)) {
+        checkLogin(email, pass);
+      }
+    } else {
+      Toast("Invalid/Empty Email & Password", "warning");
+    }
   };
 
-  const checkLogin = (user, pass) => {
+  useEffect(() => {
+    const user = Cookies.get("user");
+    const token = Cookies.get("token");
+    if (user != undefined && token != undefined) {
+      navigate(`/dashboard`);
+    }
+    setLoading(false);
+  }, []);
+
+  const sendHome = () => {
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 3000);
+  };
+
+  const clearBoxes = () => {
+    setEmail("");
+    setPass("");
+  };
+
+  const checkLogin = (email, pass) => {
     axios
       .post(`${BaseUrl}/api/v1/login`, {
-        name: "John Doe",
-        password: "Hello",
-        email: "john.doe@example.com",
+        email: email,
+        password: pass,
       })
       .then((response) => {
+        clearBoxes();
+        if (response.data.status == "OK") {
+          Toast("Login Successful", "success");
+          Cookies.set("user", response.data.requestedUser.email);
+          Cookies.set("token", response.data.requestedUser.password, {
+            expires: 7,
+          });
+          sendHome();
+        }
         console.log(response.data);
       })
       .catch((error) => {
+        clearBoxes();
+        console.log(error.response.data);
         if (error.response.data.message == "Invalid User") {
-          Toast("Account Not Found");
+          Toast("Account Not Found", "error");
+        } else if (error.response.data.message == "Incorrect Password") {
+          Toast("Incorrect Password", "error");
         }
       });
   };
 
   return (
-    <div>
-      <ToastContainer />
-      <Header />
-      <div className={styles.main}>
-        <div className={styles.left}>
-          <CarouselC />
-        </div>
-        <div className={styles.right}>
-          <div className={styles.right_main}>
-            <div className={styles.title}>DROP-N-GO</div>
-            <div className={styles.desc}>
-              Drop your credentials to start sharing
-            </div>
-            <div className={styles.lowerdiv}>
-              <div className={styles.input_box}>
-                <input
-                  onChange={(e) => {
-                    setUser(e.target.value);
-                  }}
-                  value={user}
-                  type="text"
-                  placeholder="Username"
-                />
-                <div className={styles.pass_box}>
-                  <input
-                    onChange={(e) => {
-                      setPass(e.target.value);
-                    }}
-                    value={pass}
-                    type={showPass === true ? "text" : "password"}
-                    placeholder="Password"
-                  />
-                  <div
-                    className={styles.show_pass}
-                    onClick={() => handlepassVisibility()}
-                  >
-                    {showPass === true ? (
-                      <AiOutlineEye />
-                    ) : (
-                      <AiOutlineEyeInvisible />
-                    )}
+    <>
+      {Loading ? (
+        <Loader />
+      ) : (
+        <>
+          <ToastContainer />
+          <div>
+            <Header />
+            <div className={styles.main}>
+              <div className={styles.left}>
+                <CarouselC />
+              </div>
+              <div className={styles.right}>
+                <div className={styles.right_main}>
+                  <div className={styles.title}>DROP-N-GO</div>
+                  <div className={styles.desc}>
+                    Drop your credentials to start sharing
+                  </div>
+                  <div className={styles.lowerdiv}>
+                    <div className={styles.input_box}>
+                      <input
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                        value={email}
+                        type="text"
+                        placeholder="Email Id"
+                      />
+                      <div className={styles.pass_box}>
+                        <input
+                          onChange={(e) => {
+                            setPass(e.target.value);
+                          }}
+                          value={pass}
+                          type={showPass === true ? "text" : "password"}
+                          placeholder="Password"
+                        />
+                        <div
+                          className={styles.show_pass}
+                          onClick={() => handlepassVisibility()}
+                        >
+                          {showPass === true ? (
+                            <AiOutlineEye />
+                          ) : (
+                            <AiOutlineEyeInvisible />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.chkbox}>
+                      <div className={styles.chkbox_div}>
+                        <input type="checkbox" name="chkbox" id="chkbox" />
+                        <p className={styles.label_chkbox}>Remember Me</p>
+                      </div>
+                      <div className={styles.forget_pass}>Forget Password?</div>
+                    </div>
+                    <div className={styles.submit_btn} onClick={handleLogin}>
+                      SUBMIT
+                    </div>
+                    <div
+                      className={styles.switchLogin}
+                      onClick={() => {
+                        navigate("/signup");
+                      }}
+                    >
+                      Not having account? Register
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className={styles.chkbox}>
-                <div className={styles.chkbox_div}>
-                  <input type="checkbox" name="chkbox" id="chkbox" />
-                  <p className={styles.label_chkbox}>Remember Me</p>
-                </div>
-                <div className={styles.forget_pass}>Forget Password?</div>
-              </div>
-              <div className={styles.submit_btn} onClick={handleLogin}>
-                SUBMIT
-              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 
