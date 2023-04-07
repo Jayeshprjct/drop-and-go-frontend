@@ -5,6 +5,7 @@ import Login from "../src/Pages/Login";
 import Signup from "../src/Pages/Signup";
 import Loader from "../src/Pages/Loader";
 import Dashboard from "../src/Pages/Dashboard";
+import Download from "../src/Pages/Download";
 import "./globals.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/signup" element={<Signup />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/loader" element={<Loader />} />
+      <Route path="/download/:slug?" element={<Download />} />
       <Route path="*" element={<Error />} />
     </Routes>
   </Router>

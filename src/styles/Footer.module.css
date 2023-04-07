@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
 .main {
   width: 100%;
   min-height: 20rem;
@@ -19,7 +22,7 @@
 
 .left h3 {
   font-size: 1.5rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Montserrat", sans-serif;
   letter-spacing: 0.5rem;
 }
 
@@ -30,24 +33,23 @@
 }
 
 .linkItem {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  border-bottom: 1px solid grey;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 1px solid rgb(53, 53, 53);
   padding: 1rem 1rem 1rem 0;
   margin: 1rem;
   color: black;
   transition: all ease-in-out 0.2s;
+  font-size: 1.3rem;
 }
 
 .linkItem:hover {
-  color: #00b3ff;
+  color: #3856ff;
   cursor: pointer;
 }
 
 .title {
   font-size: 1.3rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: black;
+  font-family: "Monteserrat", sans-serif;
   letter-spacing: 0.5rem;
   margin-top: 1rem;
 }

@@ -60,7 +60,7 @@ const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header menu="default" />
       <div className={styles.main}>
         <div className={styles.main_1}>
           <div className={styles.heading_container} data-aos="fade-up">
@@ -104,7 +104,6 @@ const Home = () => {
               src="https://assets1.lottiefiles.com/packages/lf20_8Lqgc6uKHf.json"
               background="transparent"
               speed="1"
-              style={{ height: "37rem" }}
               loop
               autoplay
             ></lottie-player>

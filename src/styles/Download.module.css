@@ -1,0 +1,159 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 8rem);
+}
+
+.UploadLayout {
+    width: 45%;
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3F3D56;
+    border-radius: 1rem;
+}
+
+.innerLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 3rem;
+}
+
+.qr {
+    height: 70%;
+    aspect-ratio: 1;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.qr img {
+    height: 100%;
+    width: 100%;
+}
+
+.innerRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+}
+
+.upper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 35%;
+}
+
+.lower {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30%;
+}
+
+.upperLeft {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.8rem;
+}
+
+.upperRight {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+
+.filetitle {
+    font-size: 1.5rem;
+    color: aliceblue;
+    font-family: "Montserrat", sans-serif;
+}
+
+.filesize {
+    font-size: 1rem;
+    color: aliceblue;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 0.5rem;
+}
+
+.deletediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    background-color: #f73a3a;
+    border-radius: 1rem;
+    margin-left: 1.8rem;
+}
+
+.sharediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    margin-left: 2rem;
+}
+
+.downloaddiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 4rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    color: rgb(43, 43, 43);
+    font-family: "Montserrat", sans-serif;
+    margin-left: 2rem;
+}
+
+.mainHeading {
+    text-align: left;
+    width: 45%;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 1rem;
+}
+
+.mainHeading span {
+    color: aliceblue;
+    font-size: 0.9rem;
+}
+
+.notfoundmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.mainerrheading {
+    font-family: "Montserrat", sans-serif;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}

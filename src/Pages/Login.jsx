@@ -74,7 +74,7 @@ const Login = () => {
   const sendHome = () => {
     setTimeout(() => {
       navigate("/dashboard");
-    }, 3000);
+    }, 1000);
   };
 
   const clearBoxes = () => {
@@ -84,7 +84,7 @@ const Login = () => {
 
   const checkLogin = (email, pass) => {
     axios
-      .post(`${BaseUrl}/api/v1/login`, {
+      .post(`${BaseUrl}/login`, {
         email: email,
         password: pass,
       })
@@ -119,7 +119,7 @@ const Login = () => {
         <>
           <ToastContainer />
           <div>
-            <Header />
+            <Header menu="default" />
             <div className={styles.main}>
               <div className={styles.left}>
                 <CarouselC />
@@ -162,10 +162,6 @@ const Login = () => {
                       </div>
                     </div>
                     <div className={styles.chkbox}>
-                      <div className={styles.chkbox_div}>
-                        <input type="checkbox" name="chkbox" id="chkbox" />
-                        <p className={styles.label_chkbox}>Remember Me</p>
-                      </div>
                       <div className={styles.forget_pass}>Forget Password?</div>
                     </div>
                     <div className={styles.submit_btn} onClick={handleLogin}>

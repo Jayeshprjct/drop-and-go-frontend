@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import styles from "../styles/Login.module.css";
 import CarouselC from "./Carousel";
@@ -23,6 +23,15 @@ const Signup = () => {
   const handlepassVisibility = () => {
     setShowPass(!showPass);
   };
+
+  useEffect(() => {
+    const user = Cookies.get("user");
+    const token = Cookies.get("token");
+    if (user != undefined && token != undefined) {
+      navigate(`/dashboard`);
+    }
+    setLoading(false);
+  });
 
   const toggleRegistered = () => {
     setRegistered(!isRegistered);
@@ -78,7 +87,7 @@ const Signup = () => {
 
   const Register = (email, name, pass) => {
     axios
-      .post(`${BaseUrl}/api/v1/register`, {
+      .post(`${BaseUrl}/register`, {
         name: name,
         password: pass,
         email: email,
@@ -114,7 +123,7 @@ const Signup = () => {
       ) : (
         <>
           <ToastContainer />
-          <Header />
+          <Header menu="default" />
           <div className={styles.main}>
             <div className={styles.left}>
               <CarouselC />
@@ -165,10 +174,6 @@ const Signup = () => {
                     </div>
                   </div>
                   <div className={styles.chkbox}>
-                    <div className={styles.chkbox_div}>
-                      <input type="checkbox" name="chkbox" id="chkbox" />
-                      <p className={styles.label_chkbox}>Remember Me</p>
-                    </div>
                     <div className={styles.forget_pass}>Forget Password?</div>
                   </div>
                   <div className={styles.submit_btn} onClick={handleLogin}>
