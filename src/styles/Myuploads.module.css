@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.main {
+    padding: 3rem 3.3rem;
+    width: 100%;
+    overflow: hidden;
+    min-height: 92vh;
+}
+
+.heading {
+    color: aliceblue;
+    font-size: 2rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.filecontainer {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.file {
+    width: 31%;
+    background-color: aliceblue;
+    height: 15rem;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    margin: 0 2rem 2rem 0;
+}
+
+.fileHeading {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.fileSize {
+    font-size: 1rem;
+    color: rgb(52, 52, 52);
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0.2rem;
+}
+
+.upperdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    padding-right: 2rem;
+}
+
+.lowerdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+}
+
+.upperleft {
+    width: 20%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.upperright {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: space-around;
+    height: 40%;
+    width: 100%;
+    padding: 0rem 1rem;
+}
+
+.delete {
+    background-color: #ff4d4d;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 20%;
+    border-radius: 0.2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.share {
+    background-color: #ffffff;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 20%;
+    border-radius: 0.2rem;
+    border: 1px solid grey;
+    transition: transform 0.2s ease-in-out;
+}
+
+.download {
+    background-color: #acff95;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 50%;
+    border-radius: 0.2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.delete:hover,
+.share:hover,
+.download:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+
+}
+
+.mainEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 75vh;
+}
+
+.EmptyHeading {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: 'Raleway', sans-serif;
+    color: #ffffff;
+    margin-top: 2.5rem;
+}
+
+.emptysubheading {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    color: #ffffff;
+    margin-top: 0.5rem;
+}

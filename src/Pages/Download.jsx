@@ -1,75 +1,109 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/Download.module.css";
-import { AiOutlineFile } from "react-icons/ai";
+import {
+  AiOutlineFile,
+  AiOutlineEye,
+  AiFillFile,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
 import axios from "axios";
 import { FaShare } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Cookies from "js-cookie";
 import Header from "./Header";
-import { BiError } from "react-icons/bi";
+import { BiError, BiLock, BiLockAlt } from "react-icons/bi";
+import { HiOutlineDownload } from "react-icons/hi";
 import Loader from "./Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Download = () => {
-  const slug = useParams();
+  const { slug } = useParams();
   const BaseUrl = import.meta.env.VITE_BaseUrl;
   const AdminId = import.meta.env.VITE_AdminId;
   const AdminPass = import.meta.env.VITE_AdminPass;
   const reqdata = `${BaseUrl}/file/download`;
-  const qrurl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${reqdata}`;
+  const [qrurl, setQrUrl] = useState("");
   const [user, setUser] = useState("");
   const [token, settoken] = useState("");
   const [FileName, setFileName] = useState("");
+  const [FileOwner, setFileOwner] = useState("");
   const [FileSize, setFileSize] = useState("");
+  const [uploadDate, setuploadDate] = useState("");
+  const [password, setPassword] = useState("");
   const [Loading, setLoading] = useState(true);
-  const [isprivate, setprivate] = useState(true);
+  const [isprivate, setprivate] = useState(false);
+  const [showpass, setShowPass] = useState(false);
+  const [toggleeye, settoggleEye] = useState(false);
   const [Exist, setExist] = useState(true);
 
-  const convertSize = (size) => {
-    return Math.round(size / 1024 ** 2);
+  const handlepassVisibility = () => {
+    settoggleEye(!toggleeye);
+  };
+
+  const toastProps = {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+  };
+
+  const Toast = (msg, type) => {
+    if (type == "warning") {
+      toast.warn(msg, toastProps);
+    } else if (type == "error") {
+      toast.error(msg, toastProps);
+    } else if (type == "info") {
+      toast.info(msg, toastProps);
+    } else if (type == "success") {
+      toast.success(msg, toastProps);
+    } else {
+      toast(msg, toastProps);
+    }
+  };
+
+  function bytesToMB(bytes) {
+    const megabytes = bytes / (1024 * 1024);
+    return megabytes.toFixed(2) + " MB";
+  }
+
+  const handleshare = () => {
+    navigator.clipboard.writeText(`/download/${slug}`);
+    Toast("Share Link Copied!", "success");
   };
 
   const verifyFile = () => {
-    console.log("Here");
     var options = {
       method: "GET",
       url: `${BaseUrl}/file/verify`,
-      params: { fileName: decodeurl(slug.slug) },
+      params: { fileName: decodeurl(slug) },
       headers: { adminId: AdminId, adminPassword: AdminPass },
     };
     axios
       .request(options)
       .then((response) => {
         setExist(true);
-        setFileName(decodeurl(slug.slug));
-        console.log(response.data.message);
-        console.log("Here1");
-        var options = {
-          method: "GET",
-          url: `${BaseUrl}/file/download`,
-          params: { fileName: decodeurl(slug.slug) },
-          headers: { fileDownloaderEmail: user },
-          responseType: "blob",
-        };
-        axios
-          .request(options)
-          .then((response) => {
-            setLoading(false);
-            setFileSize(`${convertSize(response.data.size)} MB`);
-            setLoading(false);
-            setExist(true);
-          })
-          .catch((error) => {
-            console.log(error);
-            setLoading(false);
-          });
+        setLoading(false);
+        setQrUrl(
+          `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=/download/${slug}`
+        );
+        setFileSize(`${bytesToMB(response.data.verifiedFile.fileSize)}`);
+        setFileOwner(response.data.verifiedFile.uploadedBy);
+        setuploadDate(formatDate(response.data.verifiedFile.uploadedOn));
+        setFileName(response.data.verifiedFile.displayName);
+        setprivate(response.data.verifiedFile.isPrivate);
+        console.log(isprivate);
       })
       .catch((err) => {
-        console.log("Here2");
         console.log(err);
         if (
           err.response.data.message ==
-          `No file named ${decodeurl(slug.slug)} found in the database!`
+          `No file named ${decodeurl(slug)} found in the database!`
         ) {
           setLoading(false);
           setExist(false);
@@ -83,13 +117,16 @@ const Download = () => {
   };
 
   useEffect(() => {
-    setUser(Cookies.get("user") != undefined ? Cookies.get("user") : "");
-    settoken(Cookies.get("token") != undefined ? Cookies.get("token") : "");
-    if (slug.slug != "" || undefined) {
-      verifyFile();
-    } else {
-      console.log("error");
-    }
+    setTimeout(() => {
+      setUser(Cookies.get("user") != undefined ? Cookies.get("user") : "");
+      settoken(Cookies.get("token") != undefined ? Cookies.get("token") : "");
+      if (slug != "" && slug != undefined) {
+        verifyFile();
+      } else {
+        setExist(false);
+        setLoading(false);
+      }
+    }, 1000);
   }, []);
 
   const FileNotFound = () => {
@@ -105,71 +142,243 @@ const Download = () => {
     );
   };
 
-  const handleDownload = (pass) => {
-    var options = {
+  function formatDate(timestamp) {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const date = new Date(timestamp);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    const formattedTime = `${day}${getOrdinalSuffix(day)} ${month}, ${year} ${
+      hours % 12
+    }:${padZero(minutes)} ${ampm}`;
+
+    return formattedTime;
+  }
+
+  function getOrdinalSuffix(day) {
+    if (day >= 11 && day <= 13) {
+      return "th";
+    }
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  }
+
+  function padZero(num) {
+    return num < 10 ? "0" + num : num;
+  }
+
+  const CheckPrivateFile = () => {
+    let options = {
       method: "GET",
       url: `${BaseUrl}/file/download`,
-      params: { fileName: decodeurl(slug.slug) },
-      headers: { fileDownloaderEmail: user },
-      responseType: "blob",
+      params: { fileName: decodeurl(slug) },
+      headers: { filePassword: password, fileDownloaderEmail: user },
     };
     axios
       .request(options)
       .then((response) => {
-        console.log(response.data.size);
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", decodeurl(slug.slug));
-        document.body.appendChild(link);
+        let options = {
+          method: "GET",
+          url: `${BaseUrl}/file/download`,
+          params: { fileName: decodeurl(slug) },
+          headers: { filePassword: password, fileDownloaderEmail: user },
+          responseType: "blob",
+        };
+        axios
+          .request(options)
+          .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", decodeurl(slug));
+            document.body.appendChild(link);
+            link.click();
+            setPassword("");
+            setShowPass(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.data.message == "Incorrect file password") {
+          console.log("Incorrect Password");
+          Toast("Incorrect File Password", "error");
+        }
+      });
+  };
+
+  const handleDownload = () => {
+    if (!isprivate) {
+      var options = {
+        method: "GET",
+        url: `${BaseUrl}/file/download`,
+        params: { fileName: decodeurl(slug) },
+        headers: { fileDownloaderEmail: user },
+        responseType: "blob",
+      };
+      axios
+        .request(options)
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", decodeurl(slug));
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((error) => console.log(error));
+    } else {
+      console.log("Protected");
+      setShowPass(true);
+    }
+  };
+
+  const handleProtectedDownload = () => {
+    CheckPrivateFile();
+    console.log("protected Download started");
+  };
+
+  const Passbox = () => {
+    return (
+      <div className={styles.passboxMain}>
+        <div className={styles.passcontainer}>
+          <div className={styles.passHeading}>File is password protected</div>
+          <div className={styles.pass_box}>
+            <input
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              autoComplete="new-password"
+              value={password}
+              type={toggleeye === true ? "text" : "password"}
+              placeholder="Password"
+            />
+            <div
+              className={styles.show_pass}
+              onClick={() => handlepassVisibility()}
+            >
+              {toggleeye === true ? (
+                <AiOutlineEye />
+              ) : (
+                <AiOutlineEyeInvisible />
+              )}
+            </div>
+          </div>
+          <div className={styles.passButtons}>
+            <div className={styles.download} onClick={handleProtectedDownload}>
+              Download
+            </div>
+            <div
+              className={styles.cancel}
+              onClick={() => {
+                setShowPass(false);
+                setPassword("");
+                settoggleEye(false);
+              }}
+            >
+              Cancel
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
   return (
     <>
+      <ToastContainer />
       {Loading == false ? (
         <>
           {Exist ? (
             <>
-              <Header />
-              <div className={styles.main}>
-                <div className={styles.mainHeading}>
-                  Your Document is Ready <span>. Uploaded By Aditya</span>
-                </div>
-                <div className={styles.UploadLayout}>
-                  <div className={styles.innerLeft}>
-                    <div className={styles.qr}>
-                      <img src={qrurl} alt="" />
+              {showpass == false ? (
+                <>
+                  <Header menu="default" />
+                  <div className={styles.main}>
+                    <div className={styles.mainHeading}>
+                      Your Document is Ready
                     </div>
-                  </div>
-                  <div className={styles.innerRight}>
-                    <div className={styles.upper}>
-                      <div className={styles.upperLeft}>
-                        <AiOutlineFile color="#FFFFFF" size="3.5rem" />
-                      </div>
-                      <div className={styles.upperRight}>
-                        <div className={styles.filetitle}>
-                          {FileName || "hello.mp4"}
-                        </div>
-                        <div className={styles.filesize}>
-                          {FileSize || "25 MB"}
+                    <div className={styles.UploadLayout}>
+                      <div className={styles.innerLeft}>
+                        <div className={styles.qr}>
+                          <img src={qrurl} alt="" />
                         </div>
                       </div>
+                      <div className={styles.innerRight}>
+                        <div className={styles.upper}>
+                          <div className={styles.upperLeft}>
+                            <AiFillFile color="#FFFFFF" size="3.5rem" />
+                          </div>
+                          <div className={styles.upperRight}>
+                            <div className={styles.filetitle}>
+                              {FileName || "hello.mp4"}
+                              <span title="Private File">
+                                {isprivate ? (
+                                  <BiLockAlt
+                                    style={{ verticalAlign: "top" }}
+                                    size="1.5rem"
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </span>
+                            </div>
+                            <div className={styles.filesize}>
+                              {FileSize || "~ MB"}
+                            </div>
+                          </div>
+                        </div>
+                        <div className={styles.lower}>
+                          <div
+                            className={styles.sharediv}
+                            onClick={handleshare}
+                          >
+                            <FaShare color="#3d3d3d" size="2rem" />
+                          </div>
+                          <div
+                            className={styles.downloaddiv}
+                            onClick={handleDownload}
+                          >
+                            <HiOutlineDownload size="2rem" />
+                            <div>Download</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className={styles.lower}>
-                      <div className={styles.sharediv}>
-                        <FaShare color="black" size="2rem" />
-                      </div>
-                      <div
-                        className={styles.downloaddiv}
-                        onClick={handleDownload}
-                      >
-                        Download
-                      </div>
+                    <div className={styles.FileInfoDiv}>
+                      By {FileOwner} . {uploadDate}
                     </div>
                   </div>
-                </div>
-              </div>
+                </>
+              ) : (
+                Passbox()
+              )}
             </>
           ) : (
             FileNotFound()

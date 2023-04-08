@@ -96,10 +96,10 @@ const Signup = () => {
         setLoading(false);
         if (response.status == 200) {
           clearBoxes();
-          // Cookies.set("user", response.data.requestedUser.email);
-          // Cookies.set("token", response.data.requestedUser.password, {
-          //   expires: 7,
-          // });
+          Cookies.set("user", response.data.requestedUser.email);
+          Cookies.set("token", response.data.requestedUser.password, {
+            expires: 1,
+          });
           Toast("Registered successfully", "success");
           setTimeout(() => {
             sendHome();

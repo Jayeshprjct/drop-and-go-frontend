@@ -74,7 +74,7 @@ const Login = () => {
   const sendHome = () => {
     setTimeout(() => {
       navigate("/dashboard");
-    }, 1000);
+    }, 750);
   };
 
   const clearBoxes = () => {
@@ -94,7 +94,7 @@ const Login = () => {
           Toast("Login Successful", "success");
           Cookies.set("user", response.data.requestedUser.email);
           Cookies.set("token", response.data.requestedUser.password, {
-            expires: 7,
+            expires: 1,
           });
           sendHome();
         }

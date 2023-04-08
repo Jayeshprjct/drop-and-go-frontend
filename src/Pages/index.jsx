@@ -63,7 +63,7 @@ const Home = () => {
       <Header menu="default" />
       <div className={styles.main}>
         <div className={styles.main_1}>
-          <div className={styles.heading_container} data-aos="fade-up">
+          <div className={styles.heading_container}>
             <div className={styles.text_container}>Sharing Made Easier</div>
             <div className={styles.lower_text}>
               Quickly share a file with others in no time!
@@ -72,7 +72,7 @@ const Home = () => {
               Start Sharing
             </div>
           </div>
-          <div className={styles.animated_Video} data-aos="fade-up">
+          <div className={styles.animated_Video}>
             <lottie-player
               src="https://assets5.lottiefiles.com/packages/lf20_qjjhj8dr.json"
               background="transparent"
@@ -86,11 +86,7 @@ const Home = () => {
         <div className={styles.main_2}>
           {feature.map((item) => {
             return (
-              <div
-                key={item.title}
-                className={styles.feature_box}
-                data-aos="fade-up"
-              >
+              <div key={item.title} className={styles.feature_box}>
                 <div className={styles.icon}>{item.icon}</div>
                 <div className={styles.feature_title}>{item.title}</div>
                 <div className={styles.feature_desc}>{item.Desc}</div>

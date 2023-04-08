@@ -1,18 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900;1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
 .main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 8rem);
+    flex-direction: column;
+    height: calc(90vh);
+}
+
+.successHeading {
+    color: #3F3D56;
+    font-size: 1.5rem;
+    font-family: 'Nunito', sans-serif;
+    width: 60%;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
 }
 
 .UploadLayout {
-    width: 80%;
-    height: 20rem;
+    width: 60%;
+    height: 18rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: #3F3D56;
-    border-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 
 .innerLeft {
@@ -20,16 +40,16 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 30%;
 }
 
 .qr {
-    height: 15rem;
-    width: 15rem;
+    height: 10rem;
+    width: 10rem;
     background-color: aliceblue;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     padding: 1rem;
     overflow: hidden;
+    margin-left: 3rem;
 }
 
 .qr img {
@@ -43,15 +63,16 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 70%;
+    width: 100%;
+    margin-left: 3rem;
 }
 
 .upper {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    height: 50%;
+    margin-bottom: 1.5rem;
 }
 
 .lower {
@@ -59,19 +80,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 50%;
 }
 
 .upperLeft {
-    width: 10%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 0.5rem;
 }
 
 .upperRight {
-    width: 90%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -80,7 +99,7 @@
 }
 
 .filetitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: aliceblue;
     font-family: "Montserrat", sans-serif;
 }
@@ -88,30 +107,31 @@
 .filesize {
     font-size: 1rem;
     color: aliceblue;
-    font-family: "Montserrat", sans-serif;
-    margin-top: 0.5rem;
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: 0.1rem;
 }
 
 .deletediv {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5rem;
-    width: 5rem;
+    height: 4rem;
+    width: 4rem;
     background-color: #f73a3a;
     border-radius: 1rem;
-    margin-left: 1.8rem;
+    transition: transform 0.2s ease-in-out;
 }
 
 .sharediv {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5rem;
-    width: 5rem;
+    height: 4rem;
+    width: 4rem;
     background-color: #ffffff;
     border-radius: 1rem;
     margin-left: 2rem;
+    transition: transform 0.2s ease-in-out;
 }
 
 .downloaddiv {
@@ -119,11 +139,19 @@
     justify-content: center;
     align-items: center;
     width: 45%;
-    height: 5rem;
+    height: 4rem;
     background-color: rgb(255, 255, 255);
     border-radius: 1rem;
     font-size: 1.2rem;
     color: rgb(43, 43, 43);
     font-family: "Montserrat", sans-serif;
     margin-left: 2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.downloaddiv:hover,
+.sharediv:hover,
+.deletediv:hover {
+    cursor: pointer;
+    transform: scale(1.05);
 }

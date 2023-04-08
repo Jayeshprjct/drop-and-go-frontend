@@ -36,6 +36,10 @@ const UploadComp = () => {
     setPass(Cookies.get("token"));
   });
 
+  function removeFileExtension(filename) {
+    return filename.replace(/\.[^/.]+$/, "");
+  }
+
   const toastProps = {
     position: "top-right",
     autoClose: 3000,
@@ -64,7 +68,7 @@ const UploadComp = () => {
   function handleDrop(event) {
     event.preventDefault();
     const newFile = event.target.files[0];
-    setFile(newFile.name);
+    setFile(removeFileExtension(newFile.name));
     setSize(
       (convertSize(newFile.size) <= 0 ? "<1" : convertSize(newFile.size)) +
         " MB"
@@ -83,7 +87,7 @@ const UploadComp = () => {
     console.log(event);
     Fileinfo.current.style.display = "block";
     const newFile = event.target.files[0];
-    setFileName(event.target.files[0].name);
+    setFileName(removeFileExtension(event.target.files[0].name));
     setFile(newFile);
     setSize(
       (convertSize(newFile.size) < 1 ? "<1" : convertSize(newFile.size)) + " MB"

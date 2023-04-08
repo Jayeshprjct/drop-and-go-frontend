@@ -84,7 +84,7 @@ const Header = (props) => {
 
   const [loginLinks, setloginLinks] = useState([
     { id: 1, title: "Dashboard", url: "/dashboard" },
-    { id: 2, title: "My Files", url: "/myfiles" },
+    { id: 2, title: "My Files", url: "/myuploads" },
     { id: 3, title: "Logout", url: "logout" },
   ]);
 

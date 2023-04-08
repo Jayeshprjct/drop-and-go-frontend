@@ -17,6 +17,8 @@ import UploadedLayout from "./UploadedLayout";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -29,19 +31,32 @@ const Dashboard = () => {
   const [isPrivate, setPrivate] = useState(false);
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [isLoading, setLoading] = useState("");
+  const [isLoading, setLoading] = useState("default");
   const [isLoader, setLoader] = useState(false);
   const [email, setEmail] = useState("");
   const [Pass, setPass] = useState("");
+  const [Text, setText] = useState("Drag and Drop file here or Choose file");
+  const passBoxClassName = !showPass
+    ? `${styles.pass_box} ${styles.hideBox}`
+    : styles.pass_box;
   const upload = useRef();
   const Fileinfo = useRef();
   useEffect(() => {
+    AOS.init({
+      duration: 600,
+      easing: "ease-in-sine",
+      delay: 100,
+    });
     setEmail(Cookies.get("user"));
     setPass(Cookies.get("token"));
     if (email == undefined) {
       navigate("/login");
     }
   });
+
+  function removeFileExtension(filename) {
+    return filename.replace(/\.[^/.]+$/, "");
+  }
 
   const toastProps = {
     position: "top-right",
@@ -74,7 +89,7 @@ const Dashboard = () => {
     for (const file of event.dataTransfer.files) {
       const newFile = file;
       setFile(newFile);
-      setFileName(newFile.name);
+      setFileName(removeFileExtension(newFile.name));
       setSize(
         (convertSize(newFile.size) <= 0 ? "<1" : convertSize(newFile.size)) +
           " MB"
@@ -91,9 +106,10 @@ const Dashboard = () => {
   }
 
   function handleFileInputChange(event) {
+    setText("Drag and Drop file here or Choose file");
     Fileinfo.current.style.display = "block";
     const newFile = event.target.files[0];
-    setFileName(event.target.files[0].name);
+    setFileName(removeFileExtension(event.target.files[0].name));
     setFile(newFile);
     setSize(
       (convertSize(newFile.size) < 1 ? "<1" : convertSize(newFile.size)) + " MB"
@@ -106,6 +122,7 @@ const Dashboard = () => {
     setFile(null);
     setCheck(false);
     setSize("");
+    setLoading("default");
   };
 
   const handleDivClick = () => {
@@ -120,6 +137,7 @@ const Dashboard = () => {
         form.append("fileName", filename);
         form.append("isPrivate", true);
         form.append("filePassword", password);
+        setLoading("loading");
       } else {
         Toast("Password can't be Empty", "error");
       }
@@ -127,6 +145,7 @@ const Dashboard = () => {
       form.append("file", file);
       form.append("fileName", filename);
       form.append("isPrivate", false);
+      setLoading("loading");
     }
     axios
       .post(`${BaseUrl}/file/upload`, form, {
@@ -136,10 +155,12 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        console.log(response);
-        setSlug(response.data.uploadedFileName);
-        setLoader(true);
-        // setTimeout(() => {}, 2000);
+        setLoading("success");
+        setTimeout(() => {
+          console.log(response);
+          setSlug(response.data.uploadedFileName);
+          setLoader(true);
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };
@@ -157,17 +178,17 @@ const Dashboard = () => {
     fileUpload();
   };
 
-  const UploadLayout = (url) => {
+  const UploadLayout = () => {
     return (
       <>
         <Header menu="login" />
-        <div className={styles.main}>
+        <div data-aos="fade-up" className={styles.main}>
           <ToastContainer />
           <div className={styles.uploadMain}>
-            <div className={styles.heading}>Start Sharing a File..</div>
-            <div className={styles.subheading}>Simple.Fast.Beautiful</div>
+            <div className={styles.heading}>Start Sharing a File</div>
+            <div className={styles.subheading}>Simple . Fast . Beautiful</div>
             <div
-              className={styles.upload_area}
+              className={`${styles.upload_area} ${styles.box}`}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
               onClick={handleDivClick}
@@ -178,9 +199,10 @@ const Dashboard = () => {
                 multiple
                 onChange={handleFileInputChange}
                 ref={upload}
+                autoComplete="off"
               />
               <AiOutlineFileAdd size={50} color="white" />
-              <div>Drag and Drop file here or Choose file</div>
+              <div>{Text}</div>
             </div>
             <div className={styles.parentdiv} ref={Fileinfo}>
               <div className={styles.fileInfo}>
@@ -217,20 +239,22 @@ const Dashboard = () => {
                       className={styles.checkInput}
                       onChange={handleToggle}
                       checked={checked}
+                      autoComplete="off"
                     />
                     <div className={styles.passHeading}>
                       Enable Password protection
                     </div>
                   </div>
                   {checked && (
-                    <div className={styles.pass_box}>
+                    <div className={passBoxClassName}>
                       <input
                         onChange={(e) => {
                           setPassword(e.target.value);
                         }}
                         value={password}
-                        type={showPass === true ? "text" : "password"}
+                        type="text"
                         placeholder="Password"
+                        autoComplete="new-password"
                       />
                       <div
                         className={styles.show_pass}
