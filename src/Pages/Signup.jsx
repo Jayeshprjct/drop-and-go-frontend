@@ -19,7 +19,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [isRegistered, setRegistered] = useState(true);
   const [showPass, setShowPass] = useState(false);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const handlepassVisibility = () => {
     setShowPass(!showPass);
   };
@@ -28,9 +28,11 @@ const Signup = () => {
     const user = Cookies.get("user");
     const token = Cookies.get("token");
     if (user != undefined && token != undefined) {
-      navigate(`/dashboard`);
+      setLoading(false);
+      navigate(`/login`);
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   });
 
   const toggleRegistered = () => {
@@ -95,7 +97,8 @@ const Signup = () => {
       .then((response) => {
         setLoading(false);
         if (response.status == 200) {
-          clearBoxes();
+          // clearBoxes();
+          console.log(response.data);
           Cookies.set("user", response.data.requestedUser.email);
           Cookies.set("token", response.data.requestedUser.password, {
             expires: 1,

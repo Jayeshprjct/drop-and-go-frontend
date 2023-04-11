@@ -7,6 +7,7 @@
     align-items: center;
     flex-direction: column;
     height: calc(100vh - 8rem);
+    width: 100%;
 }
 
 .UploadLayout {
@@ -172,6 +173,7 @@
 }
 
 .passboxMain {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -179,6 +181,7 @@
     height: 100vh;
     width: 100%;
     z-index: 1000;
+    opacity: 1;
 }
 
 .passcontainer {
@@ -209,7 +212,7 @@
 }
 
 .download {
-    background-color: #53ff9b;
+    background-color: #FFFFFF;
     color: black;
     font-family: "Montserrat", sans-serif;
     font-size: 1.2rem;
@@ -219,6 +222,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out;
 }
 
 .cancel {
@@ -233,11 +237,14 @@
     align-items: center;
     border-radius: 0.5rem;
     margin-left: 1rem;
+    transition: transform 0.2s ease-in-out;
 }
 
 
+.download:hover,
 .cancel:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .downloaddiv:hover,
@@ -294,4 +301,299 @@
 
 .pass_box input:focus {
     outline: none;
+}
+
+.loader {
+    width: 30px;
+    aspect-ratio: 1;
+    border: 5px solid #FFF;
+    border-bottom-color: #292929;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .passboxMain {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #3F3D56;
+        height: 100vh;
+        width: 100%;
+        z-index: 1000;
+        opacity: 1;
+    }
+
+    .passcontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 10rem;
+        border-radius: 1rem;
+        background-color: transparent;
+    }
+
+    .passHeading {
+        font-size: 1.3rem;
+        color: #e7ffff;
+        font-family: "Montserrat", sans-serif;
+        margin-bottom: 1.5rem;
+
+    }
+
+    .passButtons {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 2rem;
+    }
+
+    .download {
+        background-color: #FFFFFF;
+        color: black;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.2rem;
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .cancel {
+        background-color: #ffffff;
+        color: black;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.2rem;
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        margin-left: 0rem;
+        margin-top: 1rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .pass_box input {
+        width: 100%;
+        border-top-left-radius: 0.4rem;
+        border-bottom-left-radius: 0.4rem;
+        border-top-right-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        border: none;
+        text-align: left;
+        padding: 1rem;
+        color: black;
+        font-size: 1.2rem;
+        font-family: 'Montserrat', sans-serif;
+        min-height: 4rem;
+    }
+
+    .pass_box {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 80%;
+        margin: 1rem 0 0 0;
+    }
+
+    .UploadLayout {
+        width: 90%;
+        height: 55svh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background-color: #3F3D56;
+        border-radius: 1rem;
+    }
+
+    .innerLeft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 100%;
+        margin-top: 3rem;
+        margin-left: 0rem;
+    }
+
+    .qr {
+        height: 11rem;
+        aspect-ratio: 1;
+        background-color: aliceblue;
+        border-radius: 1rem;
+        padding: 1rem;
+        overflow: hidden;
+    }
+
+    .qr img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .innerRight {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .upper {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
+    }
+
+    .lower {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .upperLeft {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1rem;
+        width: 23%;
+    }
+
+    .upperRight {
+        width: 77%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        padding-left: 1rem;
+    }
+
+    .filetitle {
+        font-size: 1.2rem;
+        color: aliceblue;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .filetitle span {
+        margin-left: 0.5rem;
+    }
+
+    .filesize {
+        font-size: 1rem;
+        color: aliceblue;
+        font-family: "Montserrat", sans-serif;
+        margin-top: 0.5rem;
+    }
+
+    .deletediv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        width: 70%;
+        background-color: #f73a3a;
+        border-radius: 1rem;
+        margin-left: 0rem;
+    }
+
+    .sharediv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        width: 30%;
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        margin-left: 0rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .downloaddiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 4rem;
+        background-color: rgb(255, 255, 255);
+        border-radius: 0.5rem;
+        font-size: 1.2rem;
+        color: rgb(43, 43, 43);
+        font-family: "Montserrat", sans-serif;
+        margin-left: 1rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .downloaddiv div {
+        margin: 0 0 0 0.5rem;
+    }
+
+    .mainHeading {
+        text-align: center;
+        width: 90%;
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-family: "Montserrat", sans-serif;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .mainHeading span {
+        color: aliceblue;
+        font-size: 0.9rem;
+    }
+
+    .notfoundmain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .mainerrheading {
+        font-family: "Montserrat", sans-serif;
+        color: #ffffff;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .FileInfoDiv {
+        text-align: center;
+        width: 90%;
+        color: #ffffff;
+        font-size: 1rem;
+        font-family: "Montserrat", sans-serif;
+        margin-top: 1rem;
+    }
 }

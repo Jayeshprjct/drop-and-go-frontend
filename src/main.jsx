@@ -8,6 +8,7 @@ import Dashboard from "../src/Pages/Dashboard";
 import Download from "../src/Pages/Download";
 import Error from "../src/Pages/Error";
 import UploadedLayout from "../src/Pages/UploadedLayout";
+import ForgetPass from "../src/Pages/Forgetpassword";
 import Myuploads from "../src/Pages/Myuploads";
 import "./globals.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forget-password" element={<ForgetPass />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/loader" element={<Loader />} />
       <Route path="/download/:slug?" element={<Download />} />

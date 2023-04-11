@@ -10,8 +10,8 @@
 
 html,
 body {
-  margin: 0;
   overflow-x: hidden;
+  margin: 0;
   height: 100svh;
   width: 100svw;
   color: rgb(var(--foreground-rgb));

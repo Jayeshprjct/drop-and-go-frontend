@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 
 import { TbHourglassEmpty } from "react-icons/tb";
+import { FaLock } from "react-icons/fa";
 
 import { HiOutlineDownload } from "react-icons/hi";
 import Cookies from "js-cookie";
@@ -29,6 +30,7 @@ const Myuploads = () => {
   const [pass, setPass] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [EmptyList, setEmptyList] = useState(false);
+  const [fileLength, setfileLength] = useState(0);
   const [fileInfo, setFileInfo] = useState([]);
 
   const Toastprops = (timer) => {
@@ -93,6 +95,7 @@ const Myuploads = () => {
           setEmptyList(true);
         } else {
           setFileInfo(res.data);
+          setfileLength(res.data.length);
           setEmptyList(false);
         }
       })
@@ -244,7 +247,9 @@ const Myuploads = () => {
           <div className={styles.main}>
             {EmptyList == false ? (
               <>
-                <div className={styles.heading}>My Uploaded Files</div>
+                <div className={styles.heading}>
+                  My Uploaded Files<span>{`(${fileLength})`}</span>
+                </div>
                 <div className={styles.filecontainer}>
                   {fileInfo.map((item) => {
                     return (
@@ -264,7 +269,11 @@ const Myuploads = () => {
                           </div>
                           <div>
                             {item.isPrivate ? (
-                              <AiFillLock title="Private File" size="1.5rem" />
+                              <FaLock
+                                title="Private File"
+                                size="1.2rem"
+                                color="#3b3b3b"
+                              />
                             ) : (
                               ""
                             )}

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Loader from "./Loader";
 
-const Login = () => {
+const ForgetPass = () => {
   const BaseUrl = import.meta.env.VITE_BaseUrl;
   const navigate = useNavigate();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -71,7 +71,6 @@ const Login = () => {
       .then((response) => {
         if (response.data.status == "OK") {
           Cookies.set("user", response.data.requestedUser.email);
-          Cookies.set("name", response.data.requestedUser.name.split(" ")[0]);
           Cookies.set("token", response.data.requestedUser.password, {
             expires: 1,
           });
@@ -117,8 +116,10 @@ const Login = () => {
   }, []);
 
   const sendHome = () => {
-    setLoading(false);
-    navigate("/dashboard");
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/dashboard");
+    }, 20);
   };
 
   const clearBoxes = () => {
@@ -137,7 +138,6 @@ const Login = () => {
         if (response.data.status == "OK") {
           Toast("Login Successful", "success");
           Cookies.set("user", response.data.requestedUser.email);
-          Cookies.set("name", response.data.requestedUser.name.split(" ")[0]);
           Cookies.set("token", response.data.requestedUser.password, {
             expires: 1,
           });
@@ -231,4 +231,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPass;

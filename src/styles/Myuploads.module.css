@@ -15,6 +15,11 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.heading>span {
+    margin-left: 1rem;
+    font-size: 1.6rem;
+}
+
 .filecontainer {
     margin-top: 5rem;
     margin-bottom: 2rem;
@@ -82,8 +87,9 @@
 
 .buttonDiv {
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    height: 40%;
+    height: 50%;
     width: 100%;
     padding: 0rem 1rem;
 }
@@ -92,7 +98,7 @@
     background-color: #ff4d4d;
     display: grid;
     place-items: center;
-    height: 100%;
+    height: 90%;
     width: 20%;
     border-radius: 0.2rem;
     transition: transform 0.2s ease-in-out;
@@ -103,7 +109,7 @@
     background-color: #ffffff;
     display: grid;
     place-items: center;
-    height: 100%;
+    height: 90%;
     width: 20%;
     border-radius: 0.2rem;
     border: 1px solid grey;
@@ -114,7 +120,7 @@
     background-color: #acff95;
     display: grid;
     place-items: center;
-    height: 100%;
+    height: 90%;
     width: 50%;
     border-radius: 0.2rem;
     transition: transform 0.2s ease-in-out;

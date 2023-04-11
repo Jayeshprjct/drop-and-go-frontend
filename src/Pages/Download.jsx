@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/Download.module.css";
+import Popup from "./Popup";
 import {
-  AiOutlineFile,
   AiOutlineEye,
   AiFillFile,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import axios from "axios";
 import { FaShare } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { MdOutlineDownloadDone } from "react-icons/md";
 import Cookies from "js-cookie";
 import Header from "./Header";
-import { BiError, BiLock, BiLockAlt } from "react-icons/bi";
+import { BiError, BiLockAlt } from "react-icons/bi";
 import { HiOutlineDownload } from "react-icons/hi";
 import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,8 +20,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Download = () => {
   const { slug } = useParams();
-  const BaseUrl = import.meta.env.VITE_BaseUrl;
+  const Dnload = useRef();
+  const popupBox = useRef();
+  const dnloadText = useRef();
+  const DnIcon = useRef();
   const AdminId = import.meta.env.VITE_AdminId;
+  const BaseUrl = import.meta.env.VITE_BaseUrl;
+  const SiteUrl = import.meta.env.VITE_SiteUrl;
   const AdminPass = import.meta.env.VITE_AdminPass;
   const reqdata = `${BaseUrl}/file/download`;
   const [qrurl, setQrUrl] = useState("");
@@ -31,13 +36,22 @@ const Download = () => {
   const [FileOwner, setFileOwner] = useState("");
   const [FileSize, setFileSize] = useState("");
   const [uploadDate, setuploadDate] = useState("");
+  const [getPass, setgetPass] = useState("");
   const [password, setPassword] = useState("");
   const [Loading, setLoading] = useState(true);
+  const [isDownLoaded, setDownLoaded] = useState("false");
+  const [Progress, setProgress] = useState(0);
   const [isprivate, setprivate] = useState(false);
   const [showpass, setShowPass] = useState(false);
   const [toggleeye, settoggleEye] = useState(false);
   const [Exist, setExist] = useState(true);
+  const [state, setState] = useState("default");
 
+  // const showDialog = () => {
+  //   setTimeout(() => {
+  //     return <Popup />;
+  //   }, 1000);
+  // };
   const handlepassVisibility = () => {
     settoggleEye(!toggleeye);
   };
@@ -73,8 +87,12 @@ const Download = () => {
   }
 
   const handleshare = () => {
-    navigator.clipboard.writeText(`/download/${slug}`);
+    navigator.clipboard.writeText(`${SiteUrl}/download/${slug}`);
     Toast("Share Link Copied!", "success");
+  };
+
+  const handleClosePopup = () => {
+    popupBox.current.style.display = "none";
   };
 
   const verifyFile = () => {
@@ -87,6 +105,7 @@ const Download = () => {
     axios
       .request(options)
       .then((response) => {
+        console.log(response);
         setExist(true);
         setLoading(false);
         setQrUrl(
@@ -97,6 +116,7 @@ const Download = () => {
         setuploadDate(formatDate(response.data.verifiedFile.uploadedOn));
         setFileName(response.data.verifiedFile.displayName);
         setprivate(response.data.verifiedFile.isPrivate);
+        setgetPass(response.data.verifiedFile.filePassword);
         console.log(isprivate);
       })
       .catch((err) => {
@@ -194,11 +214,15 @@ const Download = () => {
   }
 
   const CheckPrivateFile = () => {
+    ProgressProps();
     let options = {
       method: "GET",
       url: `${BaseUrl}/file/download`,
       params: { fileName: decodeurl(slug) },
-      headers: { filePassword: password, fileDownloaderEmail: user },
+      headers: {
+        filePassword: password,
+        fileDownloaderEmail: user || "default@gmail.com",
+      },
     };
     axios
       .request(options)
@@ -207,7 +231,10 @@ const Download = () => {
           method: "GET",
           url: `${BaseUrl}/file/download`,
           params: { fileName: decodeurl(slug) },
-          headers: { filePassword: password, fileDownloaderEmail: user },
+          headers: {
+            filePassword: password,
+            fileDownloaderEmail: user || "default@gmail.com",
+          },
           responseType: "blob",
         };
         axios
@@ -219,28 +246,59 @@ const Download = () => {
             link.setAttribute("download", decodeurl(slug));
             document.body.appendChild(link);
             link.click();
+            CompletedProps();
             setPassword("");
             setShowPass(false);
           })
           .catch((error) => {
             console.log(error);
+            ResetProps();
           });
       })
       .catch((error) => {
         if (error.response.data.message == "Incorrect file password") {
           console.log("Incorrect Password");
           Toast("Incorrect File Password", "error");
+          ResetProps();
         }
       });
   };
 
+  const ResetProps = () => {
+    Dnload.current.style.backgroundColor = "#ffffff";
+    Dnload.current.style.color = "#2a2a2a";
+    dnloadText.current.innerText = "Download";
+    setDownLoaded("false");
+  };
+
+  const ProgressProps = () => {
+    Dnload.current.style.backgroundColor = "#ffeba8";
+    Dnload.current.style.color = "#2a2a2a";
+    dnloadText.current.innerText = "Downloading";
+    setDownLoaded("progress");
+  };
+
+  const CompletedProps = () => {
+    Dnload.current.style.backgroundColor = "#f3f3f3";
+    Dnload.current.style.color = "#1f1f1f";
+    dnloadText.current.innerText = "Downloaded";
+    setDownLoaded("true");
+
+    // setTimeout(() => {
+    //   ResetProps();
+    // }, 2000);
+  };
+
   const handleDownload = () => {
     if (!isprivate) {
+      ProgressProps();
       var options = {
         method: "GET",
         url: `${BaseUrl}/file/download`,
         params: { fileName: decodeurl(slug) },
-        headers: { fileDownloaderEmail: user },
+        headers: {
+          fileDownloaderEmail: user || "default@gmail.com",
+        },
         responseType: "blob",
       };
       axios
@@ -252,22 +310,29 @@ const Download = () => {
           link.setAttribute("download", decodeurl(slug));
           document.body.appendChild(link);
           link.click();
+          CompletedProps();
+          console.log(Progress);
         })
         .catch((error) => console.log(error));
     } else {
-      console.log("Protected");
       setShowPass(true);
+      popupBox.current.style.display = "flex";
     }
   };
 
   const handleProtectedDownload = () => {
-    CheckPrivateFile();
+    if (password != "") {
+      CheckPrivateFile();
+    } else {
+      Toast("Password can't be empty", "error");
+    }
+
     console.log("protected Download started");
   };
 
   const Passbox = () => {
     return (
-      <div className={styles.passboxMain}>
+      <div ref={popupBox} className={styles.passboxMain}>
         <div className={styles.passcontainer}>
           <div className={styles.passHeading}>File is password protected</div>
           <div className={styles.pass_box}>
@@ -292,13 +357,26 @@ const Download = () => {
             </div>
           </div>
           <div className={styles.passButtons}>
-            <div className={styles.download} onClick={handleProtectedDownload}>
-              Download
+            <div
+              className={styles.download}
+              onClick={handleProtectedDownload}
+              ref={Dnload}
+            >
+              <span style={{ marginRight: "1rem" }} ref={DnIcon}>
+                {isDownLoaded === "true" ? (
+                  <MdOutlineDownloadDone size="2rem" />
+                ) : isDownLoaded === "progress" ? (
+                  <span className={styles.loader} />
+                ) : (
+                  <HiOutlineDownload size="2rem" />
+                )}
+              </span>
+              <div ref={dnloadText}>Download</div>
             </div>
             <div
               className={styles.cancel}
               onClick={() => {
-                setShowPass(false);
+                handleClosePopup();
                 setPassword("");
                 settoggleEye(false);
               }}
@@ -317,68 +395,72 @@ const Download = () => {
         <>
           {Exist ? (
             <>
-              {showpass == false ? (
-                <>
-                  <Header menu="default" />
-                  <div className={styles.main}>
-                    <div className={styles.mainHeading}>
-                      Your Document is Ready
-                    </div>
-                    <div className={styles.UploadLayout}>
-                      <div className={styles.innerLeft}>
-                        <div className={styles.qr}>
-                          <img src={qrurl} alt="" />
-                        </div>
-                      </div>
-                      <div className={styles.innerRight}>
-                        <div className={styles.upper}>
-                          <div className={styles.upperLeft}>
-                            <AiFillFile color="#FFFFFF" size="3.5rem" />
-                          </div>
-                          <div className={styles.upperRight}>
-                            <div className={styles.filetitle}>
-                              {FileName || "hello.mp4"}
-                              <span title="Private File">
-                                {isprivate ? (
-                                  <BiLockAlt
-                                    style={{ verticalAlign: "top" }}
-                                    size="1.5rem"
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </span>
-                            </div>
-                            <div className={styles.filesize}>
-                              {FileSize || "~ MB"}
-                            </div>
-                          </div>
-                        </div>
-                        <div className={styles.lower}>
-                          <div
-                            className={styles.sharediv}
-                            onClick={handleshare}
-                          >
-                            <FaShare color="#3d3d3d" size="2rem" />
-                          </div>
-                          <div
-                            className={styles.downloaddiv}
-                            onClick={handleDownload}
-                          >
-                            <HiOutlineDownload size="2rem" />
-                            <div>Download</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.FileInfoDiv}>
-                      By {FileOwner} . {uploadDate}
+              {showpass && Passbox()}
+              {isDownLoaded == "true" && (user == undefined || user == "") ? (
+                <Popup />
+              ) : (
+                ""
+              )}
+              <Header />
+              <div className={styles.main}>
+                <div className={styles.mainHeading}>Your Document is Ready</div>
+                <div className={styles.UploadLayout}>
+                  <div className={styles.innerLeft}>
+                    <div className={styles.qr}>
+                      <img src={qrurl} alt="" />
                     </div>
                   </div>
-                </>
-              ) : (
-                Passbox()
-              )}
+                  <div className={styles.innerRight}>
+                    <div className={styles.upper}>
+                      <div className={styles.upperLeft}>
+                        <AiFillFile color="#FFFFFF" size="3.5rem" />
+                      </div>
+                      <div className={styles.upperRight}>
+                        <div className={styles.filetitle}>
+                          {FileName || "hello.mp4"}
+                          <span title="Private File">
+                            {isprivate ? (
+                              <BiLockAlt
+                                style={{ verticalAlign: "top" }}
+                                size="1.5rem"
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </span>
+                        </div>
+                        <div className={styles.filesize}>
+                          {FileSize || "~ MB"}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.lower}>
+                      <div className={styles.sharediv} onClick={handleshare}>
+                        <FaShare color="#3d3d3d" size="2rem" />
+                      </div>
+                      <div
+                        className={styles.downloaddiv}
+                        onClick={handleDownload}
+                        ref={Dnload}
+                      >
+                        <span style={{ marginRight: "1rem" }} ref={DnIcon}>
+                          {isDownLoaded === "true" ? (
+                            <MdOutlineDownloadDone size="2rem" />
+                          ) : isDownLoaded === "progress" ? (
+                            <span className={styles.loader} />
+                          ) : (
+                            <HiOutlineDownload size="2rem" />
+                          )}
+                        </span>
+                        <div ref={dnloadText}>Download</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.FileInfoDiv}>
+                  By {FileOwner} . {uploadDate}
+                </div>
+              </div>
             </>
           ) : (
             FileNotFound()
