@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/UploadedLayout.module.css";
-import { AiOutlineFile, AiFillCheckCircle } from "react-icons/ai";
+import { AiOutlineCopy, AiFillFile, AiOutlineShareAlt } from "react-icons/ai";
 import axios from "axios";
-import { BsFillFileEarmarkCheckFill } from "react-icons/bs";
-import { FaShare } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { MdOutlineFileDownload } from "react-icons/md";
 import Cookies from "js-cookie";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UploadedLayout = ({ title, slug, size, password }) => {
+const UploadedLayout = ({ title = "hii", slug = "hii", size, password }) => {
+  const encodeurl = (slug) => {
+    const replacedString = slug.replace(/\./g, "-");
+    return replacedString;
+  };
+  const FileSize = size;
+  const FileName = title;
   const navigate = useNavigate();
   const BaseUrl = import.meta.env.VITE_BaseUrl;
-  const reqdata = `${BaseUrl}/file/download`;
-  const qrurl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${reqdata}`;
+  const SiteUrl = import.meta.env.VITE_SiteUrl;
+  const Requrl = `${SiteUrl}/download/${encodeurl(slug)}`;
+  const qrurl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${SiteUrl}/download/${slug}`;
   const [user, setUser] = useState("");
   const [token, settoken] = useState("");
   useEffect(() => {
     setUser(Cookies.get("user") != undefined ? Cookies.get("user") : "");
     settoken(Cookies.get("token") != undefined ? Cookies.get("token") : "");
   }, []);
-
-  const encodeurl = (slug) => {
-    const replacedString = slug.replace(/\./g, "-");
-    const encodedUrl = "/download/" + replacedString;
-    return encodedUrl;
-  };
 
   const handleshare = () => {
     console.log(encodeurl(slug));
@@ -80,66 +80,110 @@ const UploadedLayout = ({ title, slug, size, password }) => {
         link.setAttribute("download", slug);
         document.body.appendChild(link);
         link.click();
+        Toast("File Downloaded", "success");
       })
       .catch((error) => console.log(error));
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(Requrl);
+    Toast("URL Copied", "success");
+  };
+
   const handleDelete = () => {
-    var options = {
-      method: "DELETE",
-      url: `${BaseUrl}/file/delete`,
-      params: { fileName: slug },
-      headers: { email: user, password: token },
-    };
-    axios
-      .request(options)
-      .then((response) => {
-        if (response.data.deleted == true) {
-          Toast("Deleted successfully", "success", 1000);
-          setTimeout(() => {
-            navigate("/login");
-          }, 1000);
-        }
-        console.log(response.data);
-      })
-      .catch((error) => console.log(error));
+    let confirmed = confirm("Are you sure you want to delete this?");
+    if (confirmed) {
+      var options = {
+        method: "DELETE",
+        url: `${BaseUrl}/file/delete`,
+        params: { fileName: slug },
+        headers: { email: user, password: token },
+      };
+      axios
+        .request(options)
+        .then((response) => {
+          if (response.data.deleted == true) {
+            Toast("Deleted successfully", "success", 1000);
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000);
+          }
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
   };
   return (
     <>
-      <ToastContainer />
       <Header />
       <div className={styles.main}>
-        <div className={styles.successHeading}>
-          <AiFillCheckCircle color="#00fe11" size="2rem" />
-          <span style={{ marginLeft: "0.7rem" }}>
-            File uploaded successfully
-          </span>
+        <div className={styles.success}>
+          <lottie-player
+            src="https://assets9.lottiefiles.com/private_files/lf30_yo2zavgg.json"
+            background="transparent"
+            speed="1"
+            style={{ width: "25rem", height: "25rem" }}
+            autoplay
+          />
         </div>
-        <div className={styles.UploadLayout}>
-          <div className={styles.innerLeft}>
-            <div className={styles.qr}>
-              <img src={qrurl} alt="" />
-            </div>
-          </div>
-          <div className={styles.innerRight}>
+        <div style={{ width: "60%", height: "100%" }}>
+          <div className={styles.Heading}>FILE UPLOADED</div>
+          <div className={styles.UploadLayout}>
             <div className={styles.upper}>
-              <div className={styles.upperLeft}>
-                <BsFillFileEarmarkCheckFill color="#FFFFFF" size="3rem" />
+              <div className={styles.qr}>
+                <img
+                  src={qrurl}
+                  alt="QR"
+                  draggable="false"
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                  }}
+                />
               </div>
-              <div className={styles.upperRight}>
-                <div className={styles.filetitle}>{title || "hello.mp4"}</div>
-                <div className={styles.filesize}>{size || "25 MB"}</div>
+              <div className={styles.upperLeft}>
+                <div className={styles.title}>
+                  <span>
+                    <AiFillFile size="3rem" />
+                  </span>
+                  {FileName}
+                  <span className={styles.size}>
+                    {`( ` + `${FileSize}` + ` )`}
+                  </span>
+                </div>
               </div>
             </div>
-            <div className={styles.lower}>
-              <div className={styles.deletediv} onClick={handleDelete}>
-                <MdDelete color="white" size="2rem" />
+            <div className={styles.shareDiv}>
+              <div className={styles.linkBox}>
+                <div title={Requrl} className={styles.linkText}>
+                  {Requrl.length >= 40
+                    ? Requrl.slice(0, 40) + " . . ."
+                    : Requrl}
+                </div>
+                <div className={styles.linkCopy} onClick={handleCopy}>
+                  <AiOutlineCopy size="2rem" color="white" />
+                </div>
               </div>
-              <div className={styles.sharediv} onClick={handleshare}>
-                <FaShare color="#7a7a7a" size="2rem" />
+              <div title="Share" className={styles.btnShare}>
+                <AiOutlineShareAlt />
               </div>
+            </div>
+            <div className={styles.shareTxt}>Or download directly . . .</div>
+            <div className={styles.buttonDiv}>
               <div className={styles.downloaddiv} onClick={handleDownload}>
-                Download
+                <div>
+                  <span>
+                    <MdOutlineFileDownload />
+                  </span>
+                  Download
+                </div>
+              </div>
+              <div className={styles.deletediv} onClick={handleDelete}>
+                <div>
+                  <span>
+                    <RiDeleteBinLine />
+                  </span>
+                  Delete
+                </div>
               </div>
             </div>
           </div>

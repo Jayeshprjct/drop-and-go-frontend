@@ -1,40 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
+
 .main {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
-    height: calc(100vh - 8rem);
+    height: calc(100vh - 5rem);
     width: 100%;
 }
 
 .UploadLayout {
-    width: 45%;
-    height: 17rem;
+    width: 60%;
+    height: 70%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
     background-color: #3F3D56;
-    border-radius: 1rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
 }
 
 .innerLeft {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 100%;
-    margin-left: 3rem;
+    padding: 3rem 0 0 3rem;
+
+
 }
 
 .qr {
-    height: 70%;
+    height: 12rem;
     aspect-ratio: 1;
     background-color: aliceblue;
     border-radius: 1rem;
     padding: 1rem;
     overflow: hidden;
+    margin: 3rem 0 0 3rem;
 }
 
 .qr img {
@@ -44,11 +50,11 @@
 
 .innerRight {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 80%;
+    width: 100%;
 }
 
 .upper {
@@ -56,29 +62,72 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 35%;
+}
+
+.Heading {
+    color: #e7ffff;
+    font-size: 2rem;
+    font-family: "Montserrat", sans-serif;
+    width: 58%;
+    letter-spacing: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.title {
+    color: #FFFFFF;
+    font-size: 1.7rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.title>span {
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+.Icon {
+    font-size: 2rem;
 }
 
 .lower {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     height: 30%;
 }
 
 .upperLeft {
-    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-left: 2.19rem;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+.size {
+    color: #ededed;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+
+.ownerName {
+    color: #dddddd;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    margin-top: 0.7rem;
+}
+
+.ownerName>span {
+    vertical-align: middle;
+    margin-right: 1rem;
 }
 
 .upperRight {
     width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     padding-left: 1rem;
@@ -128,33 +177,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 30%;
+    max-height: 4rem;
     height: 4rem;
-    background-color: rgb(255, 255, 255);
-    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    background-color: #ffffff;
+    border-radius: 0.2rem;
     font-size: 1.2rem;
-    color: rgb(43, 43, 43);
+    color: #2b2b2b;
     font-family: "Montserrat", sans-serif;
-    margin-left: 2rem;
-    transition: transform 0.2s ease-in-out;
+    margin-top: 2rem;
+    margin-left: 3.4rem;
+    transition: all 0.2s ease-in-out;
 }
 
 .downloaddiv div {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 0.1rem;
 }
 
 .mainHeading {
     text-align: left;
     width: 45%;
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: 0.5rem;
     font-family: "Montserrat", sans-serif;
     margin-bottom: 1rem;
 }
 
 .mainHeading span {
     color: aliceblue;
-    font-size: 0.9rem;
+    font-size: 0.1rem;
 }
 
 .notfoundmain {
@@ -247,10 +299,16 @@
     cursor: pointer;
 }
 
-.downloaddiv:hover,
 .sharediv:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.01);
+}
+
+.downloaddiv:hover {
+    background-color: #3F3D56;
+    color: #dddddd;
+    border: 1px solid white;
+    cursor: pointer;
 }
 
 .FileInfoDiv {
@@ -322,6 +380,65 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+.linkBox {
+    background-color: #3f3d56;
+    border: 1px solid rgba(255, 255, 255, 0.114);
+    height: 4rem;
+    width: inherit;
+    border-radius: 15rem;
+    position: relative;
+    margin: 2rem 0 0 3rem;
+}
+
+.linkCopy {
+    background-color: #514e6f;
+    aspect-ratio: 1;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 15rem;
+    border: 1px solid rgba(128, 128, 128, 0.308);
+    display: grid;
+    place-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.linkCopy:hover {
+    background-color: #65628a;
+    cursor: pointer;
+}
+
+.linkText {
+    color: aliceblue;
+    font-size: 1.3rem;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+    padding: 1rem;
+    width: 100%;
+}
+
+.shareTxt {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    margin: 1.5rem 0 0 3.6rem;
+
+}
+
+.buttonDiv {
+    width: 100%;
+}
+
+.lock {
+    margin-left: 0.5rem;
+}
+
+.ownerName1 {
+    display: none;
 }
 
 @media only screen and (max-width: 800px) {
@@ -440,12 +557,13 @@
     }
 
     .qr {
-        height: 11rem;
+        height: 15rem;
         aspect-ratio: 1;
         background-color: aliceblue;
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         padding: 1rem;
         overflow: hidden;
+        margin: 1rem 0 0 0;
     }
 
     .qr img {
@@ -467,6 +585,7 @@
         width: 100%;
         display: flex;
         justify-content: flex-start;
+        flex-direction: column;
         align-items: center;
         height: auto;
     }
@@ -481,13 +600,20 @@
         padding: 1rem;
     }
 
+    .Icon {
+        font-size: 2rem;
+    }
+
     .upperLeft {
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 1rem;
-        width: 23%;
+        padding-top: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+        margin: 0;
+        width: 100%;
     }
 
     .upperRight {
@@ -514,6 +640,10 @@
         color: aliceblue;
         font-family: "Montserrat", sans-serif;
         margin-top: 0.5rem;
+    }
+
+    img {
+        pointer-events: none;
     }
 
     .deletediv {
@@ -562,7 +692,7 @@
         text-align: center;
         width: 90%;
         color: #ffffff;
-        font-size: 1.5rem;
+        font-size: 1.9rem;
         font-family: "Montserrat", sans-serif;
         margin-top: 2rem;
         margin-bottom: 1rem;
@@ -595,5 +725,129 @@
         font-size: 1rem;
         font-family: "Montserrat", sans-serif;
         margin-top: 1rem;
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: calc(100vh - 5rem);
+        width: 100%;
+    }
+
+    .UploadLayout {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        background-color: #3F3D56;
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+    }
+
+    .Heading {
+        color: #e7ffff;
+        font-size: 2rem;
+        font-family: "Montserrat", sans-serif;
+        width: 100%;
+        letter-spacing: 0.25rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .title {
+        color: #FFFFFF;
+        font-size: 1.3rem;
+        font-family: "Montserrat", sans-serif;
+        width: 100%;
+        text-align: left;
+    }
+
+    .linkBox {
+        background-color: #3f3d56;
+        border: 1px solid rgba(255, 255, 255, 0.114);
+        height: 4rem;
+        width: 100%;
+        border-radius: 15rem;
+        margin: 0 auto 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .linkCopy {
+        background-color: #514e6f;
+        aspect-ratio: 1;
+        height: 100%;
+        width: 16%;
+        border-radius: 15rem;
+        border: 1px solid rgba(128, 128, 128, 0.308);
+        display: grid;
+        place-items: center;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .linkCopy:hover {
+        background-color: #65628a;
+        cursor: pointer;
+    }
+
+    .linkText {
+        color: aliceblue;
+        font-size: 1.1rem;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+        padding: 1rem;
+        width: 80%;
+        overflow: hidden;
+    }
+
+    .downloaddiv {
+        width: 80%;
+        margin: auto;
+    }
+
+    .shareTxt {
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-family: "Montserrat", sans-serif;
+        width: 100%;
+        margin: 1.5rem 0 1.5rem 0;
+        text-align: center;
+
+    }
+
+    .ownerName {
+        color: #dddddd;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.1rem;
+        text-align: left;
+        margin-top: 0.5rem;
+        display: none;
+    }
+
+    .ownerName>span {
+        vertical-align: middle;
+        margin-right: 1rem;
+    }
+
+    .ownerName1 {
+        color: #dddddd;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.1rem;
+        text-align: left;
+        margin-top: 0.5rem;
+        width: 100%;
+        margin-top: 1rem;
+        display: block;
+    }
+
+    .ownerName1>span {
+        vertical-align: middle;
+        margin-right: 1rem;
     }
 }

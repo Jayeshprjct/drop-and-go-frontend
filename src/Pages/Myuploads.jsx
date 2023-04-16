@@ -14,6 +14,7 @@ import { TbHourglassEmpty } from "react-icons/tb";
 import { FaLock } from "react-icons/fa";
 
 import { HiOutlineDownload } from "react-icons/hi";
+import { MdContentCopy } from "react-icons/md";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -259,8 +260,13 @@ const Myuploads = () => {
                             <AiFillFile size="2.5rem" color="#2d2d2d" />
                           </div>
                           <div className={styles.upperright}>
-                            <div className={styles.fileHeading}>
-                              {item.displayName}
+                            <div
+                              className={styles.fileHeading}
+                              title={item.displayName}
+                            >
+                              {item.displayName.length >= 18
+                                ? item.displayName.slice(0, 18) + " . . ."
+                                : item.displayName}
                             </div>
                             <div className={styles.fileSize}>
                               {bytesToMB(item.fileSize)} .{" "}
@@ -295,7 +301,7 @@ const Myuploads = () => {
                                 handleShare(item.actualName);
                               }}
                             >
-                              <AiFillCopy size="1.8rem" color="#2d2d2d" />
+                              <MdContentCopy size="1.8rem" color="#2d2d2d" />
                             </div>
                             <div
                               className={styles.download}

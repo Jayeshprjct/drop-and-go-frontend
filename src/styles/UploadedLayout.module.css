@@ -6,50 +6,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: calc(90vh);
+    height: calc(100vh - 5rem);
+    width: 100%;
 }
 
-.successHeading {
-    color: #3F3D56;
-    font-size: 1.5rem;
-    font-family: 'Nunito', sans-serif;
-    width: 60%;
-    padding: 1rem;
-    background-color: #ffffff;
-    border-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-    height: 5rem;
+.success {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
 }
 
 .UploadLayout {
-    width: 60%;
-    height: 18rem;
+    width: 100%;
+    height: 65%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
     background-color: #3F3D56;
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
 }
 
 .innerLeft {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 100%;
+    padding: 3rem 0 0 3rem;
+
+
 }
 
 .qr {
-    height: 10rem;
-    width: 10rem;
+    height: 12rem;
+    aspect-ratio: 1;
     background-color: aliceblue;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     padding: 1rem;
     overflow: hidden;
-    margin-left: 3rem;
+    margin: 3rem 0 0 3rem;
 }
 
 .qr img {
@@ -59,12 +57,11 @@
 
 .innerRight {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100%;
     width: 100%;
-    margin-left: 3rem;
 }
 
 .upper {
@@ -72,27 +69,69 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 1.5rem;
+}
+
+.Heading {
+    color: #e7ffff;
+    font-size: 2rem;
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    letter-spacing: 0.25rem;
+    padding-left: 2rem;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+}
+
+.title {
+    color: #FFFFFF;
+    font-size: 1.7rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.title>span {
+    vertical-align: middle;
+    margin-right: 1rem;
 }
 
 .lower {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    height: 30%;
 }
 
 .upperLeft {
-    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
+
+.size {
+    color: #ededed;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1.2rem;
     margin-left: 0.5rem;
 }
 
+.ownerName {
+    color: #dddddd;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+}
+
+.ownerName>span {
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
 .upperRight {
+    width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     padding-left: 1rem;
@@ -104,54 +143,197 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.filetitle span {
+    margin-left: 0.5rem;
+}
+
 .filesize {
     font-size: 1rem;
     color: aliceblue;
-    font-family: 'Titillium Web', sans-serif;
-    margin-top: 0.1rem;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 0.5rem;
+}
+
+.downloaddiv>div>span {
+    vertical-align: middle;
+    font-size: 2rem;
+    margin-right: 0.5rem;
 }
 
 .deletediv {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 30%;
+    max-height: 4rem;
     height: 4rem;
-    width: 4rem;
-    background-color: #f73a3a;
-    border-radius: 1rem;
-    transition: transform 0.2s ease-in-out;
+    background-color: #ff3d3d;
+    border: 1px solid transparent;
+    border-radius: 0.2rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 2rem;
+    transition: all 0.2s ease-in-out;
 }
 
-.sharediv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4rem;
-    width: 4rem;
-    background-color: #ffffff;
-    border-radius: 1rem;
-    margin-left: 2rem;
-    transition: transform 0.2s ease-in-out;
+.deletediv>div>span {
+    vertical-align: middle;
+    font-size: 2rem;
+    margin-right: 0.5rem;
 }
 
 .downloaddiv {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 30%;
+    max-height: 4rem;
     height: 4rem;
-    background-color: rgb(255, 255, 255);
-    border-radius: 1rem;
+    background-color: #ffffff;
+    border-radius: 0.2rem;
     font-size: 1.2rem;
-    color: rgb(43, 43, 43);
+    color: #2b2b2b;
     font-family: "Montserrat", sans-serif;
-    margin-left: 2rem;
-    transition: transform 0.2s ease-in-out;
+    margin-left: 3.4rem;
+    transition: all 0.2s ease-in-out;
 }
 
-.downloaddiv:hover,
-.sharediv:hover,
+.downloaddiv div {
+    margin: 0 0 0 0.1rem;
+}
+
+.linkBox {
+    background-color: #3f3d56;
+    border: 1px solid rgba(255, 255, 255, 0.114);
+    height: 4rem;
+    min-width: 50%;
+    border-radius: 15rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 2rem 0 0 3rem;
+    padding: 0 0 0 1rem;
+}
+
+.linkCopy {
+    background-color: #514e6f;
+    aspect-ratio: 1;
+    height: 100%;
+    border-radius: 15rem;
+    border: 1px solid rgba(128, 128, 128, 0.308);
+    display: grid;
+    place-items: center;
+    margin-left: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.linkCopy:hover {
+    background-color: #65628a;
+    cursor: pointer;
+}
+
+.linkText {
+    color: aliceblue;
+    font-size: 1.2rem;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+    padding: 1rem;
+    width: 90%;
+    overflow: hidden;
+}
+
+.shareTxt {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    margin: 1.5rem 0 0 3.6rem;
+
+}
+
+.buttonDiv {
+    display: flex;
+    width: 100%;
+    margin: 2rem 0 0 0;
+}
+
+.lock {
+    margin-left: 0.5rem;
+}
+
+.shareDiv {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+.btnShare {
+    padding: 1rem;
+    background-color: #dddddd;
+    color: #3F3D56;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 15rem;
+    height: 4.5rem;
+    margin: 2rem 0 0 2rem;
+    aspect-ratio: 1;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.btnShare:hover {
+    cursor: pointer;
+    background-color: #3F3D56;
+    color: #dddddd;
+    border: 1px solid white;
+    transform: scale(1.05);
+}
+
+.downloaddiv:hover {
+    cursor: pointer;
+    background-color: #3F3D56;
+    color: #dddddd;
+    border: 1px solid white;
+}
+
 .deletediv:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    background-color: #3f3d56;
+    color: #ff3737;
+    border: 1px solid #ff3737;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .main {
+        padding: 1rem;
+    }
+
+    .successHeading {
+        width: 100%;
+    }
+
+    .UploadLayout {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .linkText {
+        font-size: 1rem;
+    }
+
+    .innerLeft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45%;
+        width: 100%;
+        padding-left: 0.4rem;
+        margin-bottom: 1rem;
+    }
 }

@@ -33,11 +33,8 @@ const Header = (props) => {
   useEffect(() => {
     if (name != "" && name != undefined) {
       setMenu("login");
-      console.log(menu);
-      console.log(name);
     } else {
       setMenu("default");
-      console.log(menu);
     }
   });
 

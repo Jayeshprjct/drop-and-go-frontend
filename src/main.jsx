@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/forget-password" element={<ForgetPass />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/loader" element={<Loader />} />
-      <Route path="/download/:slug?" element={<Download />} />
+      <Route path="/download/:slug" element={<Download />} />
       <Route path="/success" element={<UploadedLayout />} />
       <Route path="/myuploads" element={<Myuploads />} />
       <Route path="*" element={<Error />} />
