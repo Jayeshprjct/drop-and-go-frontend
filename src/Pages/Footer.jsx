@@ -4,7 +4,10 @@ import styles from "../styles/Footer.module.css";
 const Footer = () => {
   const handleClick = (url) => window.open(url, "!blank")?.focus();
   const [url, setUrl] = useState([
-    { id: 1, url: "https://www.google.com" },
+    {
+      id: 1,
+      url: "https://www.freeprivacypolicy.com/live/021e8266-1873-4cc4-ac44-e92eb4f86be3",
+    },
     { id: 2, url: "https://www.youtube.com" },
     { id: 3, url: "https://www.youtube.com" },
     { id: 4, url: "https://www.youtube.com" },

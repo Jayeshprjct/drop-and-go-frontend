@@ -6,6 +6,7 @@ import Signup from "../src/Pages/Signup";
 import Loader from "../src/Pages/Loader";
 import Dashboard from "../src/Pages/Dashboard";
 import Download from "../src/Pages/Download";
+import Privacy from "../src/Pages/Privacy";
 import Error from "../src/Pages/Error";
 import UploadedLayout from "../src/Pages/UploadedLayout";
 import ForgetPass from "../src/Pages/Forgetpassword";
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/download/:slug" element={<Download />} />
       <Route path="/success" element={<UploadedLayout />} />
       <Route path="/myuploads" element={<Myuploads />} />
+      <Route path="/Privacy" element={<Privacy />} />
       <Route path="*" element={<Error />} />
     </Routes>
   </Router>

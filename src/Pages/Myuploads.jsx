@@ -241,7 +241,6 @@ const Myuploads = () => {
 
   return (
     <>
-      <ToastContainer />
       {isLoading == false ? (
         <>
           <Header menu="login" />

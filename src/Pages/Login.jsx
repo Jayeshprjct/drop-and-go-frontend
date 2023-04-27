@@ -162,7 +162,6 @@ const Login = () => {
         <Loader />
       ) : (
         <>
-          <ToastContainer />
           <div>
             <Header menu="default" />
             <div className={styles.main}>
@@ -205,9 +204,6 @@ const Login = () => {
                           )}
                         </div>
                       </div>
-                    </div>
-                    <div className={styles.chkbox}>
-                      <div className={styles.forget_pass}>Forget Password?</div>
                     </div>
                     <div className={styles.submit_btn} onClick={handleLogin}>
                       SUBMIT

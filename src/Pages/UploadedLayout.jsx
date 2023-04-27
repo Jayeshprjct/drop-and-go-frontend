@@ -90,6 +90,18 @@ const UploadedLayout = ({ title = "hii", slug = "hii", size, password }) => {
     Toast("URL Copied", "success");
   };
 
+  const handleShare = () => {
+    try {
+      navigator.share({
+        title: "Hey! I've shared an link to access a file I've uploaded",
+        url: Requrl,
+      });
+    } catch (err) {
+      Toast("Sharing not supported", "error");
+      console.error("Share failed:", err.message);
+    }
+  };
+
   const handleDelete = () => {
     let confirmed = confirm("Are you sure you want to delete this?");
     if (confirmed) {
@@ -126,7 +138,7 @@ const UploadedLayout = ({ title = "hii", slug = "hii", size, password }) => {
             autoplay
           />
         </div>
-        <div style={{ width: "60%", height: "100%" }}>
+        <div className={styles.rightdiv}>
           <div className={styles.Heading}>FILE UPLOADED</div>
           <div className={styles.UploadLayout}>
             <div className={styles.upper}>
@@ -163,7 +175,11 @@ const UploadedLayout = ({ title = "hii", slug = "hii", size, password }) => {
                   <AiOutlineCopy size="2rem" color="white" />
                 </div>
               </div>
-              <div title="Share" className={styles.btnShare}>
+              <div
+                title="Share"
+                onClick={handleShare}
+                className={styles.btnShare}
+              >
                 <AiOutlineShareAlt />
               </div>
             </div>

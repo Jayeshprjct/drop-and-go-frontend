@@ -27,6 +27,7 @@ const Download = () => {
   const Requrl = `${SiteUrl}/download/${slug}`;
   const popupBox = useRef();
   const dnloadText = useRef();
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
   const txtbox = useRef(null);
   const DnIcon = useRef();
   const AdminId = import.meta.env.VITE_AdminId;
@@ -49,6 +50,8 @@ const Download = () => {
   const [toggleeye, settoggleEye] = useState(false);
   const [Exist, setExist] = useState(true);
   const [state, setState] = useState("default");
+
+  console.log(windowSize.current[0]);
 
   const handlepassVisibility = () => {
     settoggleEye(!toggleeye);
@@ -393,85 +396,92 @@ const Download = () => {
               )}
               <Header />
               <div className={styles.main}>
-                <div className={styles.Heading}>FILE RETRIEVED</div>
-                <div className={styles.UploadLayout}>
-                  <div className={styles.upper}>
-                    <div className={styles.qr}>
-                      <img
-                        src={qrurl}
-                        alt="QR"
-                        draggable="false"
-                        onContextMenu={(e) => {
-                          e.preventDefault();
-                        }}
-                      />
-                    </div>
-                    <div className={styles.upperLeft}>
-                      <div className={styles.title}>
-                        <span>
-                          <AiFillFile className={styles.Icon} />
-                        </span>
-                        {FileName}
-                        {isprivate && (
-                          <span className={styles.lock}>
-                            <HiLockClosed
-                              title="Private file"
-                              size="2rem"
-                              color="white"
-                            />
+                <div className={styles.success}></div>
+                <div className={styles.mainContainer}>
+                  <div className={styles.Heading}>FILE RETRIEVED</div>
+                  <div className={styles.UploadLayout}>
+                    <div className={styles.upper}>
+                      <div className={styles.qr}>
+                        <img
+                          src={qrurl}
+                          alt="QR"
+                          draggable="false"
+                          onContextMenu={(e) => {
+                            e.preventDefault();
+                          }}
+                        />
+                      </div>
+                      <div className={styles.upperLeft}>
+                        <div className={styles.title}>
+                          <span>
+                            <AiFillFile className={styles.Icon} />
                           </span>
-                        )}
-                        <span className={styles.size}>
-                          {`( ` + `${FileSize}` + ` )`}
-                        </span>
-                      </div>
-                      <div className={styles.ownerName}>
-                        <span>
-                          <AiOutlineUser className={styles.Icon} />
-                        </span>
-                        {`~ By ` + `${FileOwner}` + ` on ${uploadDate}`}
-                      </div>
-                      <div className={styles.ownerName1}>
-                        <span>
-                          <AiOutlineUser className={styles.Icon} />
-                        </span>
-                        {`By ${FileOwner}`}
+                          {FileName}
+                          {isprivate && (
+                            <span className={styles.lock}>
+                              <HiLockClosed
+                                title="Private file"
+                                size="2rem"
+                                color="white"
+                              />
+                            </span>
+                          )}
+                          {windowSize.current[0] >= 800 ? (
+                            <span
+                              className={styles.size}
+                            >{`( ${FileSize} )`}</span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                        <div className={styles.ownerName}>
+                          <span>
+                            <AiOutlineUser className={styles.Icon} />
+                          </span>
+                          {`~ By ` + `${FileOwner}` + ` on ${uploadDate}`}
+                        </div>
+                        <div className={styles.ownerName1}>
+                          <span>
+                            <AiOutlineUser className={styles.Icon} />
+                          </span>
+                          {`By ${FileOwner}`}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={styles.linkBox}>
-                    <div
-                      title={Requrl}
-                      ref={txtbox}
-                      className={styles.linkText}
-                    >
-                      {Requrl.length >= 50
-                        ? Requrl.slice(0, 50) + " . . ."
-                        : Requrl}
+                    <div className={styles.linkBox}>
+                      <div
+                        title={Requrl}
+                        ref={txtbox}
+                        className={styles.linkText}
+                      >
+                        {Requrl.length >= 50
+                          ? Requrl.slice(0, 50) + " . . ."
+                          : Requrl}
+                      </div>
+                      <div className={styles.linkCopy} onClick={handleCopy}>
+                        <AiOutlineCopy size="2rem" color="white" />
+                      </div>
                     </div>
-                    <div className={styles.linkCopy} onClick={handleCopy}>
-                      <AiOutlineCopy size="2rem" color="white" />
+                    <div className={styles.shareTxt}>
+                      Or download directly . . .
                     </div>
-                  </div>
-                  <div className={styles.shareTxt}>
-                    Or download directly . . .
-                  </div>
-                  <div className={styles.buttonDiv}>
-                    <div
-                      className={styles.downloaddiv}
-                      onClick={handleDownload}
-                      ref={Dnload}
-                    >
-                      <span style={{ marginRight: "1rem" }} ref={DnIcon}>
-                        {isDownLoaded === "true" ? (
-                          <MdOutlineDownloadDone size="2rem" />
-                        ) : isDownLoaded === "progress" ? (
-                          <span className={styles.loader} />
-                        ) : (
-                          <HiOutlineDownload size="2rem" />
-                        )}
-                      </span>
-                      <div ref={dnloadText}>Download</div>
+                    <div className={styles.buttonDiv}>
+                      <div
+                        className={styles.downloaddiv}
+                        onClick={handleDownload}
+                        ref={Dnload}
+                      >
+                        <span style={{ marginRight: "1rem" }} ref={DnIcon}>
+                          {isDownLoaded === "true" ? (
+                            <MdOutlineDownloadDone size="2rem" />
+                          ) : isDownLoaded === "progress" ? (
+                            <span className={styles.loader} />
+                          ) : (
+                            <HiOutlineDownload size="2rem" />
+                          )}
+                        </span>
+                        <div ref={dnloadText}>Download</div>
+                      </div>
                     </div>
                   </div>
                 </div>

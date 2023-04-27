@@ -125,7 +125,6 @@ const Signup = () => {
         <Loader />
       ) : (
         <>
-          <ToastContainer />
           <Header menu="default" />
           <div className={styles.main}>
             <div className={styles.left}>
@@ -175,9 +174,6 @@ const Signup = () => {
                         )}
                       </div>
                     </div>
-                  </div>
-                  <div className={styles.chkbox}>
-                    <div className={styles.forget_pass}>Forget Password?</div>
                   </div>
                   <div className={styles.submit_btn} onClick={handleLogin}>
                     SUBMIT
