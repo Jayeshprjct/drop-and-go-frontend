@@ -3,10 +3,10 @@ import styles from "../styles/CarouselC.module.css";
 
 const CarouselC = () => {
   const images = [
-    "/../public/img1.jpeg",
-    "/../public/img2.jpeg",
-    "/../public/img3.jpeg",
-    "/../public/img4.jpeg",
+    "/public/img1.jpeg",
+    "/public/img2.jpeg",
+    "/public/img3.jpeg",
+    "/public/img4.jpeg",
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
 
