@@ -29,7 +29,7 @@ const CarouselC = () => {
       <div className={styles.imgDiv}>
         <img
           src={images[currentSlide]}
-          alt={`Slide${currentSlide}`}
+          alt={``}
           width={630}
           height={550}
           draggable={false}
